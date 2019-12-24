@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/mojila/.dotnet/store/|arch|/|tfm|",
+      "/home/mojila/.nuget/packages"
+    ]
+  }
+}

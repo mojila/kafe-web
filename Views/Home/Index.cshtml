@@ -2,7 +2,44 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome blay</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style type="text/css">
+.wrapper {
+    height: 100vh;
+    background: url('images/d7ac2685298625.5db31762e1daf.jpg') center no-repeat;
+    background-size: cover;
+}
+</style>
+
+<div class="w-100 wrapper">
+    <div class="container">
+        <div class="row justify-content-center align-items-center text-center p-2">
+            <div class="m-1 col-sm-8 col-md-6 col-lg-4 shadow-sm p-4 mb-5 bg-white border rounded mt-5">
+                <div class="pt-3 pb-5">
+                    <img class="rounded mx-auto d-block" src="images/icons8-coffee-maker-64.png" alt="" width=70px height=70px>
+                    <p class="text-center text-uppercase mt-3">Akses Kasir</p>
+                    @using (Html.BeginForm())
+                    {
+                        <div class="form text-center">
+                            <div class="form-group input-group-md">
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Masukkan No. Karyawan">
+                                <!--<div class="invalid-feedback">
+                                    Errors in email during form validation, also add .is-invalid class to the input fields
+                                </div> -->
+                            </div>
+                            <div class="form-group input-group-md">
+                                <input type="password" class="form-control" id="password" placeholder="Kata sandi">
+                                <!--<div class="invalid-feedback">
+                                    Errors in password during form validation, also add .is-invalid class to the input fields
+                                </div> -->
+                            </div>
+                            <button class="btn btn-lg btn-block btn-primary mt-4" type="submit"
+                                value="LoginForm">
+                                Masuk
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

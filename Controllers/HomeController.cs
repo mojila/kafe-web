@@ -18,10 +18,17 @@ namespace KafeWeb.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Index(string email)
+        {
+            return Redirect("/Menu");
+        } 
 
         public IActionResult Privacy()
         {

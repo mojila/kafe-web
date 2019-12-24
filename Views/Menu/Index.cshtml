@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Menu";
+}
+
+<style type="text/css">
+.wrapper {
+    background: url('images/a3e62485298625.5db31762dd2a6.jpg') center no-repeat;
+    background-size: cover;
+}
+</style>
+
+<div class="p-3 bg-white vh-100 wrapper">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-2 rounded">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar8">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <span class="navbar-text">&nbsp;</span>
+        <div class="navbar-collapse collapse" id="navbar8">
+            <ul class="navbar-nav abs-center-x">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Kafe</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home">Keluar </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="bg-white p-3 rounded shadow-sm">
+        <div class="row">
+            <div class="col col-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Cari makanan atau minuman">
+                    <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-6">
+                <div class="p-3 border rounded"></div>
+            </div>
+        </div>
+    </div>
+</div>

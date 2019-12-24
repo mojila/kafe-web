@@ -20534,6 +20534,11 @@
       "FilePath": "/home/mojila/Projects/KafeWeb/Views/Home/Privacy.cshtml",
       "TargetPath": "Views/Home/Privacy.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/mojila/Projects/KafeWeb/Views/Menu/Index.cshtml",
+      "TargetPath": "Views/Menu/Index.cshtml",
+      "FileKind": "mvc"
     }
   ],
   "SerializationFormat": "0.2"

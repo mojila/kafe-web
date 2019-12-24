@@ -33,3 +33,4 @@
 /home/mojila/Projects/KafeWeb/obj/Debug/netcoreapp3.1/KafeWeb.dll
 /home/mojila/Projects/KafeWeb/obj/Debug/netcoreapp3.1/KafeWeb.pdb
 /home/mojila/Projects/KafeWeb/obj/Debug/netcoreapp3.1/KafeWeb.csproj.CopyComplete
+/home/mojila/Projects/KafeWeb/obj/Debug/netcoreapp3.1/Razor/Views/Menu/Index.cshtml.g.cs

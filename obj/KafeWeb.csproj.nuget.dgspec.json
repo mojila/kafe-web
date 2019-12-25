@@ -1,30 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mojila\\Projects\\kafe-web\\KafeWeb.csproj": {}
+    "/Users/mojila/Projects/kafe-web/KafeWeb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mojila\\Projects\\kafe-web\\KafeWeb.csproj": {
+    "/Users/mojila/Projects/kafe-web/KafeWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mojila\\Projects\\kafe-web\\KafeWeb.csproj",
+        "projectUniqueName": "/Users/mojila/Projects/kafe-web/KafeWeb.csproj",
         "projectName": "KafeWeb",
-        "projectPath": "C:\\Users\\Mojila\\Projects\\kafe-web\\KafeWeb.csproj",
-        "packagesPath": "C:\\Users\\Mojila\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mojila\\Projects\\kafe-web\\obj\\",
+        "projectPath": "/Users/mojila/Projects/kafe-web/KafeWeb.csproj",
+        "packagesPath": "/Users/mojila/.nuget/packages/",
+        "outputPath": "/Users/mojila/Projects/kafe-web/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Mojila\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/mojila/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +39,24 @@
             "FontAwesome": {
               "target": "Package",
               "version": "[4.7.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SQLite": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.0, )"
             }
           },
           "imports": [
@@ -64,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.100/RuntimeIdentifierGraph.json"
         }
       }
     }

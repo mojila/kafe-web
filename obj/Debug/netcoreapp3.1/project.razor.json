@@ -1,5 +1,5 @@
 {
-  "FilePath": "/home/mojila/Projects/KafeWeb/KafeWeb.csproj",
+  "FilePath": "c:\\Users\\Mojila\\Projects\\kafe-web\\KafeWeb.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -20501,43 +20501,48 @@
   "RootNamespace": "KafeWeb",
   "Documents": [
     {
-      "FilePath": "/home/mojila/Projects/KafeWeb/Views/_ViewImports.cshtml",
-      "TargetPath": "Views/_ViewImports.cshtml",
+      "FilePath": "c:\\Users\\Mojila\\Projects\\kafe-web\\Views\\_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/mojila/Projects/KafeWeb/Views/Shared/_ValidationScriptsPartial.cshtml",
-      "TargetPath": "Views/Shared/_ValidationScriptsPartial.cshtml",
+      "FilePath": "c:\\Users\\Mojila\\Projects\\kafe-web\\Views\\_ViewStart.cshtml",
+      "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/mojila/Projects/KafeWeb/Views/_ViewStart.cshtml",
-      "TargetPath": "Views/_ViewStart.cshtml",
+      "FilePath": "c:\\Users\\Mojila\\Projects\\kafe-web\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/mojila/Projects/KafeWeb/Views/Home/Index.cshtml",
-      "TargetPath": "Views/Home/Index.cshtml",
+      "FilePath": "c:\\Users\\Mojila\\Projects\\kafe-web\\Views\\Home\\Privacy.cshtml",
+      "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/mojila/Projects/KafeWeb/Views/Shared/Error.cshtml",
-      "TargetPath": "Views/Shared/Error.cshtml",
+      "FilePath": "c:\\Users\\Mojila\\Projects\\kafe-web\\Views\\Shared\\_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/mojila/Projects/KafeWeb/Views/Shared/_Layout.cshtml",
-      "TargetPath": "Views/Shared/_Layout.cshtml",
+      "FilePath": "c:\\Users\\Mojila\\Projects\\kafe-web\\Views\\Menu\\Index.cshtml",
+      "TargetPath": "Views\\Menu\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/mojila/Projects/KafeWeb/Views/Home/Privacy.cshtml",
-      "TargetPath": "Views/Home/Privacy.cshtml",
+      "FilePath": "c:\\Users\\Mojila\\Projects\\kafe-web\\Views\\Home\\Index.cshtml",
+      "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/mojila/Projects/KafeWeb/Views/Menu/Index.cshtml",
-      "TargetPath": "Views/Menu/Index.cshtml",
+      "FilePath": "c:\\Users\\Mojila\\Projects\\kafe-web\\Views\\Order\\Index.cshtml",
+      "TargetPath": "Views\\Order\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Mojila\\Projects\\kafe-web\\Views\\Shared\\Error.cshtml",
+      "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
     }
   ],

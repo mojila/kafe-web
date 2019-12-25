@@ -1,8 +1,9 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/home/mojila/.dotnet/store/|arch|/|tfm|",
-      "/home/mojila/.nuget/packages"
+      "C:\\Users\\Mojila\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Mojila\\.nuget\\packages",
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
     ]
   }
 }

@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using User.Data;
 using System.Linq;
-using Hash;
 
 namespace User.Models {
     public class User {

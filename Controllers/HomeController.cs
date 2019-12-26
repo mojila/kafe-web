@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KafeWeb.Models;
+using User.Data;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace KafeWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private UserContext context;
+        public HomeController(UserContext userContext)
         {
-            _logger = logger;
+            context = userContext;
         }
 
         [HttpGet]
@@ -26,7 +29,13 @@ namespace KafeWeb.Controllers
 
         [HttpPost]
         public string Login(string Username, string Password){
-            return $"Hello {Username}";
+            if (ModelState.IsValid) {
+                List<User.Models.User> users = context.Users.ToList<User.Models.User>();
+
+                return users.First<User.Models.User>().Name;
+            }
+
+            return "Error database connection";
         }
 
         public IActionResult Privacy()

@@ -25,10 +25,9 @@ namespace KafeWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string email)
-        {
-            return Redirect("/Menu");
-        } 
+        public string Login(string Username, string Password){
+            return $"Hello {Username}";
+        }
 
         public IActionResult Privacy()
         {

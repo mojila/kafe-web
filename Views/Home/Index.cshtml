@@ -17,26 +17,20 @@
                 <div class="pt-3 pb-5">
                     <img class="rounded mx-auto d-block" src="images/icons8-coffee-maker-64.png" alt="" width=70px height=70px>
                     <p class="text-center text-uppercase mt-3">Akses Kasir</p>
-                    @using (Html.BeginForm())
+                    <div class="alert alert-danger">Username atau password salah</div>
+                    @using (Html.BeginForm("Login", "Home", FormMethod.Post,
+                        new {@class="form text-center"}))
                     {
-                        <div class="form text-center">
-                            <div class="form-group input-group-md">
-                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Masukkan No. Karyawan">
-                                <!--<div class="invalid-feedback">
-                                    Errors in email during form validation, also add .is-invalid class to the input fields
-                                </div> -->
-                            </div>
-                            <div class="form-group input-group-md">
-                                <input type="password" class="form-control" id="password" placeholder="Kata sandi">
-                                <!--<div class="invalid-feedback">
-                                    Errors in password during form validation, also add .is-invalid class to the input fields
-                                </div> -->
-                            </div>
-                            <button class="btn btn-lg btn-block btn-primary mt-4" type="submit"
-                                value="LoginForm">
-                                Masuk
-                            </button>
+                        <div class="form-group input-group-md">
+                            <input class="form-control" id="Username" name="Username" placeholder="Masukkan Username"/>
                         </div>
+                        <div class="form-group input-group-md">
+                            <input type="password" class="form-control" id="Password" name="Password" placeholder="Kata sandi"/>
+                        </div>
+                        <button class="btn btn-lg btn-block btn-primary mt-4" type="submit"
+                            value="LoginForm">
+                            Masuk
+                        </button>
                     }
                 </div>
             </div>

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using User.Data;
+using Kafe.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace KafeWeb
@@ -27,7 +27,7 @@ namespace KafeWeb
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<UserContext>(optionsAction => 
+            services.AddDbContext<KafeContext>(optionsAction => 
                 optionsAction.UseSqlite(Configuration.GetConnectionString("UserContext")));
         }
 

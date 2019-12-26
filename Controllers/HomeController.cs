@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using KafeWeb.Models;
-using User.Data;
+using Kafe.Models;
+using Kafe.Data;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,10 +15,10 @@ namespace KafeWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private UserContext context;
-        public HomeController(UserContext userContext)
+        private KafeContext context;
+        public HomeController(KafeContext kafeContext)
         {
-            context = userContext;
+            context = kafeContext;
         }
 
         [HttpGet]
@@ -30,9 +30,9 @@ namespace KafeWeb.Controllers
         [HttpPost]
         public string Login(string Username, string Password){
             if (ModelState.IsValid) {
-                List<User.Models.User> users = context.Users.ToList<User.Models.User>();
+                List<User> users = context.Users.ToList<User>();
 
-                return users.First<User.Models.User>().Name;
+                return users.First<User>().Name;
             }
 
             return "Error database connection";
@@ -46,7 +46,7 @@ namespace KafeWeb.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

@@ -2,10 +2,10 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using User.Data;
+using Kafe.Data;
 using System.Linq;
 
-namespace User.Models {
+namespace Kafe.Models {
     public class User {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,8 +15,8 @@ namespace User.Models {
 
     public static class SeedData {
         public static void Initialize(IServiceProvider serviceProvider) {
-            using (var context = new UserContext(serviceProvider
-                .GetRequiredService<DbContextOptions<UserContext>>())) {
+            using (var context = new KafeContext(serviceProvider
+                .GetRequiredService<DbContextOptions<KafeContext>>())) {
                 if (context.Users.Any()) {
                     return;
                 }

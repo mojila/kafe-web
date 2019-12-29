@@ -9,5 +9,7 @@ namespace KafeWeb.Data {
 
         public DbSet<KafeWeb.Models.User> Users { get; set; }
         public DbSet<KafeWeb.Models.Menu> Menus {get; set;}
+
+        public DbSet<KafeWeb.Models.Order> Orders {get; set;}
     }
 }

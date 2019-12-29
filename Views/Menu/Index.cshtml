@@ -3,6 +3,7 @@
     Boolean orderSuccess = (ViewBag.orderSuccess as String) == "true" ? true:false;
     List<KafeWeb.Models.Menu> menus = ViewBag.menus as List<KafeWeb.Models.Menu>;
     List<KafeWeb.Models.Order> orders = ViewBag.orders as List<KafeWeb.Models.Order>;
+    KafeWeb.Models.User user = ViewBag.user as KafeWeb.Models.User;
 }
 
 <style type="text/css">
@@ -40,8 +41,8 @@
                             <p class="p">Rp. @menu.Price</p>
                             <div class="mb-3 input-group">
                                 <input class="form-control" placeholder="Jumlah" value="1"/>
-                                <button class="btn btn-outline-success"
-                                    onclick="order(`@menu.Id`)">Pesan</button>
+                                <button class="btn btn-outline-success" 
+                                    onclick="order('@menu.Id', this)">Pesan</button>
                             </div>
                         </div>
                     </div>
@@ -49,6 +50,11 @@
                 </div>
             </div>
             <div class="col col-4">
+                <div class="p-3 border rounded">
+                    <div>
+                        <h5 class="h5">Kasir: @user.Name</h5>
+                    </div>
+                </div>
                 <div class="p-3 border rounded">
                     <div>
                         <h5 class="h5">Pesanan</h5>
@@ -64,19 +70,29 @@
                                         <th>Item</th>
                                         <th>Jumlah</th>
                                         <th>Subtotal</th>
+                                        <th>Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Mocca</td>
-                                        <td>10</td>
-                                        <td>10000</td>
-                                    </tr>
+                                    @foreach (KafeWeb.Models.Order order in orders)
+                                    {
+                                        <tr>
+                                            <td>@order.menu.Name</td>
+                                            <td>@order.quantity</td>
+                                            <td>@(order.menu.Price * order.quantity)</td>
+                                            <td>
+                                                <a href="/Menu/CancelOrder/@order.Id" class="btn btn-danger btn-sm">Batal</a>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         }
                     </div>
                     @if (orders.Count > 0) {
+                        <div class="text-right mb-3">
+                            Total: Rp. @ViewBag.total
+                        </div>
                         <div>
                             <button class="btn btn-success btn-block">Kirim Pesanan</button>
                         </div>
@@ -87,6 +103,10 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    const order = (id) => alert(id);
+<script>
+    const order = (id, el) => {
+        let quantity = Number(el.previousElementSibling.value);
+
+        window.location = `/Menu/CreateOrder/${id}?quantity=${quantity}`;
+    }
 </script>

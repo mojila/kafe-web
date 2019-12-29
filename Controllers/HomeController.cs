@@ -45,7 +45,7 @@ namespace KafeWeb.Controllers
             if (ModelState.IsValid) {
                 try {
                     User user = context.Users.Where(d => d.Username == Username && d.Password == Password).FirstOrDefault<User>();
-                    HttpContext.Session.SetString("username", user.Name);
+                    HttpContext.Session.SetString("username", user.Username);
 
                     return Redirect("/Menu");
                 } catch (NullReferenceException e) {

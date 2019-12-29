@@ -2,11 +2,11 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Kafe.Data;
+using KafeWeb.Data;
 using System.Linq;
-using Kafe.Models;
+using KafeWeb.Models;
 
-namespace Kafe.Models {
+namespace KafeWeb.Models {
     public static class SeedData {
         public static void Initialize(IServiceProvider serviceProvider) {
             using (var context = new KafeContext(serviceProvider

@@ -1,4 +1,4 @@
-namespace Kafe.Models {
+namespace KafeWeb.Models {
     public class User {
         public int Id { get; set; }
         public string Name { get; set; }

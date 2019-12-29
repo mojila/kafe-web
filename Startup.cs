@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Kafe.Data;
+using KafeWeb.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace KafeWeb

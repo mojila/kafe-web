@@ -7,8 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Kafe.Models;
-using Kafe.Data;
+using KafeWeb.Models;
+using KafeWeb.Data;
 
 namespace KafeWeb
 {

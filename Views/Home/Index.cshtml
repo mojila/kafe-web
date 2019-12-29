@@ -1,11 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Boolean isError = (ViewBag.isError as String) == "true" ? true:false;
+    String errorMessage = ViewBag.errorMessage as String;
 }
 
 <style type="text/css">
 .wrapper {
     height: 100vh;
-    background: url('images/d7ac2685298625.5db31762e1daf.jpg') center no-repeat;
+    background: url('/images/d7ac2685298625.5db31762e1daf.jpg') center no-repeat;
     background-size: cover;
 }
 </style>
@@ -15,9 +17,11 @@
         <div class="row justify-content-center align-items-center text-center p-2">
             <div class="m-1 col-sm-8 col-md-6 col-lg-4 shadow-sm p-4 mb-5 bg-white border rounded mt-5">
                 <div class="pt-3 pb-5">
-                    <img class="rounded mx-auto d-block" src="images/icons8-coffee-maker-64.png" alt="" width=70px height=70px>
+                    <img class="rounded mx-auto d-block" src="/images/icons8-coffee-maker-64.png" alt="" width=70px height=70px>
                     <p class="text-center text-uppercase mt-3">Akses Kasir</p>
-                    <div class="alert alert-danger">Username atau password salah</div>
+                    @if (isError) {
+                        <div class="alert alert-danger">@errorMessage</div>
+                    }
                     @using (Html.BeginForm("Login", "Home", FormMethod.Post,
                         new {@class="form text-center"}))
                     {

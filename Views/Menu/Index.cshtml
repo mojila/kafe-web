@@ -1,19 +1,22 @@
 @{
     ViewData["Title"] = "Menu";
+    Boolean orderSuccess = (ViewBag.orderSuccess as String) == "true" ? true:false;
 }
 
 <style type="text/css">
 .wrapper {
-    background: url('images/a3e62485298625.5db31762dd2a6.jpg') center no-repeat;
+    background: url('/images/a3e62485298625.5db31762dd2a6.jpg') center no-repeat;
     background-size: cover;
 }
 </style>
 
 <div class="p-3 bg-white vh-100 wrapper">
     <partial name="~/Views/Shared/_Navigator.cshtml"/>
-    <div class="alert alert-success" role="alert">
-        Pesanan diproses!
-    </div>
+    @if (orderSuccess) {
+        <div class="alert alert-success" role="alert">
+            Pesanan diproses!
+        </div>
+    }
     <div class="bg-white p-3 rounded shadow-sm">
         <div class="row">
             <div class="col col-8">

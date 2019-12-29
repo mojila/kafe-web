@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Kafe.Models;
 using Kafe.Data;
@@ -24,29 +25,46 @@ namespace KafeWeb.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.isError = "false";
+            ViewBag.errorMessage = "";
+
+            if (HttpContext.Session.GetString("username") != null) {
+                return Redirect("/Menu");
+            }
+
+            if (TempData["isError"] != null) {
+                ViewBag.isError = TempData["isError"].ToString();
+                ViewBag.errorMessage = TempData["errorMessage"].ToString();
+            }
+
             return View();
         }
 
         [HttpPost]
-        public string Login(string Username, string Password){
+        public IActionResult Login(string Username, string Password){
             if (ModelState.IsValid) {
-                List<User> users = context.Users.ToList<User>();
+                try {
+                    User user = context.Users.Where(d => d.Username == Username && d.Password == Password).FirstOrDefault<User>();
+                    HttpContext.Session.SetString("username", user.Name);
 
-                return users.First<User>().Name;
+                    return Redirect("/Menu");
+                } catch (NullReferenceException e) {
+                    Debug.WriteLine(e);
+
+                    TempData["isError"] = "true";
+                    TempData["errorMessage"] = "Username atau Password salah.";
+                    return RedirectToAction("Index");
+                }
             }
 
-            return "Error database connection";
+            return Content($"Username: {Username}, Password: {Password}");
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        [HttpGet]
+        public IActionResult Logout() {
+            HttpContext.Session.Remove("username");
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View();
+            return Redirect("/Home");
         }
     }
 }

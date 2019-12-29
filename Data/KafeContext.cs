@@ -7,6 +7,7 @@ namespace Kafe.Data {
 
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Kafe.Models.User> Users { get; set; }
+        public DbSet<Kafe.Models.Menu> Menus {get; set;}
     }
 }

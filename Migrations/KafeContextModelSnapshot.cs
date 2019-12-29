@@ -15,6 +15,26 @@ namespace KafeWeb.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.0");
 
+            modelBuilder.Entity("Kafe.Models.Menu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Picture")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Menus");
+                });
+
             modelBuilder.Entity("Kafe.Models.User", b =>
                 {
                     b.Property<int>("Id")

@@ -1,10 +1,11 @@
 @{
     ViewData["Title"] = "Pesanan";
+    List<Table> tables = ViewBag.tables as List<Table>;
 }
 
 <style type="text/css">
 .wrapper {
-    background: url('images/a3e62485298625.5db31762dd2a6.jpg') center no-repeat;
+    background: url('/images/a3e62485298625.5db31762dd2a6.jpg') center no-repeat;
     background-size: cover;
 }
 </style>
@@ -15,12 +16,12 @@
         <div class="row">
             <div class="col col-12">
                 <div class="d-flex flex-wrap">
-                    <div class="card p-3 bg-primary mr-3 mb-3" style="width: 11rem; cursor: pointer;">
-                        <h5 class="h5 text-white text-center">Meja 1</h5>
-                    </div>
-                    <div class="card p-3 bg-secondary mr-3 mb-3" style="width: 11rem;">
-                        <h5 class="h5 text-center">Meja 2</h5>
-                    </div>
+                    @foreach (Table table in tables)
+                    {
+                        <div class="card p-3 bg-secondary mr-3 mb-3" style="width: 11rem; cursor: pointer;">
+                            <h5 class="h5 text-white text-center">@table.Name</h5>
+                        </div>    
+                    }
                 </div>
             </div>
         </div>

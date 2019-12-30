@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KafeWeb.Migrations
 {
     [DbContext(typeof(KafeContext))]
-    [Migration("20191229151938_InitialCreate")]
+    [Migration("20191230040436_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,20 @@ namespace KafeWeb.Migrations
                     b.HasIndex("menuId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("KafeWeb.Models.Table", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tables");
                 });
 
             modelBuilder.Entity("KafeWeb.Models.User", b =>

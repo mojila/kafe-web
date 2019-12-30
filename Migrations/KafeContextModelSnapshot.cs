@@ -55,6 +55,20 @@ namespace KafeWeb.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("KafeWeb.Models.Table", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tables");
+                });
+
             modelBuilder.Entity("KafeWeb.Models.User", b =>
                 {
                     b.Property<int>("Id")

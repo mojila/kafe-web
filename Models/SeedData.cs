@@ -11,7 +11,7 @@ namespace KafeWeb.Models {
         public static void Initialize(IServiceProvider serviceProvider) {
             using (var context = new KafeContext(serviceProvider
                 .GetRequiredService<DbContextOptions<KafeContext>>())) {
-                if (context.Users.Any() && context.Menus.Any()) {
+                if (context.Users.Any() && context.Menus.Any() && context.Tables.Any()) {
                     return;
                 }
 
@@ -28,6 +28,15 @@ namespace KafeWeb.Models {
                         Name = "Cappucino",
                         Picture = "",
                         Price = 12000
+                    }
+                );
+
+                context.Tables.AddRange(
+                    new Table {
+                        Name = "Meja 1"
+                    },
+                    new Table {
+                        Name = "Meja 2"
                     }
                 );
 

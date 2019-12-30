@@ -23,6 +23,20 @@ namespace KafeWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TableOrders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    DoneStatus = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TableOrders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tables",
                 columns: table => new
                 {
@@ -71,22 +85,27 @@ namespace KafeWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TableOrders",
+                name: "TableOrderItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    DoneStatus = table.Column<bool>(nullable: false),
+                    TableOrderId = table.Column<int>(nullable: true),
                     OrderId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TableOrders", x => x.Id);
+                    table.PrimaryKey("PK_TableOrderItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TableOrders_Orders_OrderId",
+                        name: "FK_TableOrderItems_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TableOrderItems_TableOrders_TableOrderId",
+                        column: x => x.TableOrderId,
+                        principalTable: "TableOrders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -97,15 +116,20 @@ namespace KafeWeb.Migrations
                 column: "menuId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TableOrders_OrderId",
-                table: "TableOrders",
+                name: "IX_TableOrderItems_OrderId",
+                table: "TableOrderItems",
                 column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TableOrderItems_TableOrderId",
+                table: "TableOrderItems",
+                column: "TableOrderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TableOrders");
+                name: "TableOrderItems");
 
             migrationBuilder.DropTable(
                 name: "Tables");
@@ -115,6 +139,9 @@ namespace KafeWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "TableOrders");
 
             migrationBuilder.DropTable(
                 name: "Menus");

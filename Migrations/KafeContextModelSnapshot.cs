@@ -81,14 +81,30 @@ namespace KafeWeb.Migrations
                     b.Property<bool>("DoneStatus")
                         .HasColumnType("INTEGER");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("TableOrders");
+                });
+
+            modelBuilder.Entity("KafeWeb.Models.TableOrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("OrderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("TableOrderId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("TableOrders");
+                    b.HasIndex("TableOrderId");
+
+                    b.ToTable("TableOrderItems");
                 });
 
             modelBuilder.Entity("KafeWeb.Models.User", b =>
@@ -118,11 +134,15 @@ namespace KafeWeb.Migrations
                         .HasForeignKey("menuId");
                 });
 
-            modelBuilder.Entity("KafeWeb.Models.TableOrder", b =>
+            modelBuilder.Entity("KafeWeb.Models.TableOrderItem", b =>
                 {
                     b.HasOne("KafeWeb.Models.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId");
+
+                    b.HasOne("KafeWeb.Models.TableOrder", "TableOrder")
+                        .WithMany()
+                        .HasForeignKey("TableOrderId");
                 });
 #pragma warning restore 612, 618
         }

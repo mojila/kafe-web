@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KafeWeb.Migrations
 {
     [DbContext(typeof(KafeContext))]
-    [Migration("20191230040436_InitialCreate")]
+    [Migration("20191230043820_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,28 @@ namespace KafeWeb.Migrations
                     b.ToTable("Tables");
                 });
 
+            modelBuilder.Entity("KafeWeb.Models.TableOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("DoneStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("TableOrders");
+                });
+
             modelBuilder.Entity("KafeWeb.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -96,6 +118,13 @@ namespace KafeWeb.Migrations
                     b.HasOne("KafeWeb.Models.Menu", "menu")
                         .WithMany()
                         .HasForeignKey("menuId");
+                });
+
+            modelBuilder.Entity("KafeWeb.Models.TableOrder", b =>
+                {
+                    b.HasOne("KafeWeb.Models.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
         }

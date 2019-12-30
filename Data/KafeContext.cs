@@ -12,6 +12,8 @@ namespace KafeWeb.Data {
 
         public DbSet<KafeWeb.Models.Order> Orders {get; set;}
 
-        public DbSet<KafeWeb.Models.Table> Tables {get; set;}
+        public DbSet<Table> Tables {get; set;}
+
+        public DbSet<TableOrder> TableOrders {get; set;}
     }
 }

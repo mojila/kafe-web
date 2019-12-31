@@ -23,20 +23,6 @@ namespace KafeWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TableOrders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    DoneStatus = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TableOrders", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tables",
                 columns: table => new
                 {
@@ -71,6 +57,7 @@ namespace KafeWeb.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     menuId = table.Column<int>(nullable: true),
+                    DoneStatus = table.Column<bool>(nullable: false),
                     quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -80,6 +67,34 @@ namespace KafeWeb.Migrations
                         name: "FK_Orders_Menus_menuId",
                         column: x => x.menuId,
                         principalTable: "Menus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TableOrders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    DoneStatus = table.Column<bool>(nullable: false),
+                    UserId = table.Column<int>(nullable: true),
+                    TableId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TableOrders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TableOrders_Tables_TableId",
+                        column: x => x.TableId,
+                        principalTable: "Tables",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TableOrders_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -124,18 +139,22 @@ namespace KafeWeb.Migrations
                 name: "IX_TableOrderItems_TableOrderId",
                 table: "TableOrderItems",
                 column: "TableOrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TableOrders_TableId",
+                table: "TableOrders",
+                column: "TableId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TableOrders_UserId",
+                table: "TableOrders",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "TableOrderItems");
-
-            migrationBuilder.DropTable(
-                name: "Tables");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Orders");
@@ -145,6 +164,12 @@ namespace KafeWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "Menus");
+
+            migrationBuilder.DropTable(
+                name: "Tables");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

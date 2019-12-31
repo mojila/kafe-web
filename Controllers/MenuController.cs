@@ -25,7 +25,7 @@ namespace Menu.Controllers
 
             if (ModelState.IsValid) {
                 List<KafeWeb.Models.Menu> menus = context.Menus.ToList<KafeWeb.Models.Menu>();
-                List<KafeWeb.Models.Order> orders = context.Orders.ToList<KafeWeb.Models.Order>();
+                List<KafeWeb.Models.Order> orders = context.Orders.Where(d => d.DoneStatus == false).ToList<KafeWeb.Models.Order>();
                 KafeWeb.Models.User user = context.Users.Where(d => d.Username == HttpContext.Session.GetString("username"))
                     .FirstOrDefault<KafeWeb.Models.User>();
                 int total = 0;
@@ -66,6 +66,7 @@ namespace Menu.Controllers
             KafeWeb.Models.Order order = new KafeWeb.Models.Order();
             order.menu = menu;
             order.quantity = int.Parse(HttpContext.Request.Query["quantity"]);
+            order.DoneStatus = false;
             context.Orders.AddRange(order);
             context.SaveChanges();
 

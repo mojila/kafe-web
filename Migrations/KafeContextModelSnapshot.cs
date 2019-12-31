@@ -42,6 +42,9 @@ namespace KafeWeb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("DoneStatus")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("menuId")
                         .HasColumnType("INTEGER");
 
@@ -81,7 +84,17 @@ namespace KafeWeb.Migrations
                     b.Property<bool>("DoneStatus")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("TableId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TableId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TableOrders");
                 });
@@ -132,6 +145,17 @@ namespace KafeWeb.Migrations
                     b.HasOne("KafeWeb.Models.Menu", "menu")
                         .WithMany()
                         .HasForeignKey("menuId");
+                });
+
+            modelBuilder.Entity("KafeWeb.Models.TableOrder", b =>
+                {
+                    b.HasOne("KafeWeb.Models.Table", "Table")
+                        .WithMany()
+                        .HasForeignKey("TableId");
+
+                    b.HasOne("KafeWeb.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("KafeWeb.Models.TableOrderItem", b =>

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "update-model": "rm KafeWeb.db Migrations/* && dotnet ef migrations add InitialCreate && dotnet ef database update",
+    "generate-controller": "dotnet aspnet-codegenerator controller -name <NameController> -m <Model> -dc KafeContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries",
     "start": "dotnet watch run"
   },
   "repository": {

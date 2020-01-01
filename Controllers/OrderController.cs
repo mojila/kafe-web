@@ -28,7 +28,7 @@ namespace Order.Controllers
                 ViewBag.orders = context.Orders.ToList<KafeWeb.Models.Order>();
                 ViewBag.tableOrderItems = context.TableOrderItems.ToList<TableOrderItem>();
                 ViewBag.menuItems = context.MenuItems.ToList<MenuItem>();
-                ViewBag.tableOrders = context.TableOrders.ToList<TableOrder>();
+                ViewBag.tableOrders = context.TableOrders.Where(d => d.DoneStatus == false).ToList<TableOrder>();
             }
 
             if (HttpContext.Session.GetString("username") == null) {

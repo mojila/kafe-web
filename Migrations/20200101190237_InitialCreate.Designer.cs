@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KafeWeb.Migrations
 {
     [DbContext(typeof(KafeContext))]
-    [Migration("20200101181544_InitialCreate")]
+    [Migration("20200101190237_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace KafeWeb.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.0");
 
-            modelBuilder.Entity("KafeWeb.Models.Menu", b =>
+            modelBuilder.Entity("KafeWeb.Models.MenuItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,7 +35,7 @@ namespace KafeWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Menus");
+                    b.ToTable("MenuItems");
                 });
 
             modelBuilder.Entity("KafeWeb.Models.Order", b =>
@@ -47,7 +47,10 @@ namespace KafeWeb.Migrations
                     b.Property<bool>("DoneStatus")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("MenuId")
+                    b.Property<int>("IdMenuItem")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("MenuItemId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("quantity")
@@ -55,7 +58,7 @@ namespace KafeWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MenuId");
+                    b.HasIndex("MenuItemId");
 
                     b.ToTable("Orders");
                 });
@@ -89,6 +92,9 @@ namespace KafeWeb.Migrations
                     b.Property<bool>("DoneStatus")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("IdTable")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("TableId")
                         .HasColumnType("INTEGER");
 
@@ -108,6 +114,9 @@ namespace KafeWeb.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdTableOrder")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("OrderId")
@@ -147,9 +156,9 @@ namespace KafeWeb.Migrations
 
             modelBuilder.Entity("KafeWeb.Models.Order", b =>
                 {
-                    b.HasOne("KafeWeb.Models.Menu", "Menu")
+                    b.HasOne("KafeWeb.Models.MenuItem", "MenuItem")
                         .WithMany()
-                        .HasForeignKey("MenuId");
+                        .HasForeignKey("MenuItemId");
                 });
 
             modelBuilder.Entity("KafeWeb.Models.TableOrder", b =>

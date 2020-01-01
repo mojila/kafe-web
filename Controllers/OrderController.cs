@@ -20,11 +20,15 @@ namespace Order.Controllers
             ViewBag.tables = new List<Table>();
             ViewBag.orders = new List<KafeWeb.Models.Order>();
             ViewBag.tableOrderItems = new List<TableOrderItem>();
+            ViewBag.tableOrders = new List<TableOrder>();
+            ViewBag.menuItems = new List<MenuItem>();
 
             if (ModelState.IsValid) {
                 ViewBag.tables = context.Tables.ToList<Table>();
                 ViewBag.orders = context.Orders.ToList<KafeWeb.Models.Order>();
                 ViewBag.tableOrderItems = context.TableOrderItems.ToList<TableOrderItem>();
+                ViewBag.menuItems = context.MenuItems.ToList<MenuItem>();
+                ViewBag.tableOrders = context.TableOrders.ToList<TableOrder>();
             }
 
             if (HttpContext.Session.GetString("username") == null) {
@@ -39,9 +43,12 @@ namespace Order.Controllers
 
         [HttpGet("/Order/TableDone/{id}", Name = "Table_Done")]
         public IActionResult TableDone(int id) {
-            Table table = context.Tables.Where(d => d.Id == id).FirstOrDefault<Table>();
+            TableOrder tableOrder = context.TableOrders.Where(d => d.Id == id).FirstOrDefault<TableOrder>();
+            tableOrder.DoneStatus = true;
+            Table table = context.Tables.Where(d => d.Id == tableOrder.IdTable).FirstOrDefault<Table>();
             table.UseStatus = false;
 
+            context.TableOrders.Update(tableOrder);
             context.Tables.Update(table);
 
             context.SaveChanges();

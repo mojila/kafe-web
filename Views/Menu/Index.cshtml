@@ -1,7 +1,7 @@
 @{
     ViewData["Title"] = "Menu";
     Boolean orderSuccess = (ViewBag.orderSuccess as String) == "true" ? true:false;
-    List<KafeWeb.Models.Menu> menus = ViewBag.menus as List<KafeWeb.Models.Menu>;
+    List<MenuItem> menus = ViewBag.menus as List<MenuItem>;
     List<KafeWeb.Models.Order> orders = ViewBag.orders as List<KafeWeb.Models.Order>;
     KafeWeb.Models.User user = ViewBag.user as KafeWeb.Models.User;
     List<Table> tables = ViewBag.tables as List<Table>;
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="pt-3 d-flex flex-wrap" style="max-height: 70vh; overflow-y: auto;">
-                    @foreach (KafeWeb.Models.Menu menu in menus)
+                    @foreach (MenuItem menu in menus)
                     {
                         <div class="card mr-3 mb-3" style="width: 11rem;">
                         <img class="card-img-top" src="@menu.Picture" alt="Card image cap">
@@ -105,9 +105,9 @@
                                     @foreach (KafeWeb.Models.Order order in orders)
                                     {
                                         <tr>
-                                            <td>@order.Menu.Name</td>
+                                            <td>@order.MenuItem.Name</td>
                                             <td>@order.quantity</td>
-                                            <td>@(order.Menu.Price * order.quantity)</td>
+                                            <td>@(order.MenuItem.Price * order.quantity)</td>
                                             <td>
                                                 
                                                 <a href="/Menu/CancelOrder/@order.Id" class="btn btn-danger btn-sm">Batal</a>

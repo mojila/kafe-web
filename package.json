@@ -1,0 +1,21 @@
+{
+  "name": "kafe-web",
+  "version": "1.0.0",
+  "description": "<h5>Based on ASP.NET Core MVC</h5> <p>Run With Command: dotnet watch run</p>",
+  "main": "index.js",
+  "scripts": {
+    "update-model": "rm KafeWeb.db Migrations/* && dotnet ef migrations add InitialCreate && dotnet ef database update",
+    "start": "dotnet watch run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mojila/kafe-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mojila/kafe-web/issues"
+  },
+  "homepage": "https://github.com/mojila/kafe-web#readme"
+}

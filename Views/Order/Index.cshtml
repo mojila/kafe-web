@@ -3,6 +3,8 @@
     List<Table> tables = ViewBag.tables as List<Table>;
     List<KafeWeb.Models.Order> orders = ViewBag.orders as List<KafeWeb.Models.Order>;
     List<TableOrderItem> tableOrderItems = ViewBag.tableOrderItems as List<TableOrderItem>;
+    List<MenuItem> menuItems = ViewBag.menuItems as List<MenuItem>;
+    List<TableOrder> tableOrders = ViewBag.tableOrders as List<TableOrder>;
 }
 
 <style type="text/css">
@@ -43,20 +45,25 @@
                                                 <th>Jumlah</th>
                                             </thead>
                                             <tbody>
-                                                @foreach (TableOrderItem tableOrderItem in tableOrderItems)
-                                                {
-                                                    <tr>
-                                                        <td>@tableOrderItem.Id</td>
-                                                        <td>Nama Menu</td>
-                                                        <td>@tableOrderItem.Order.quantity</td>
-                                                    </tr>
+                                                @{
+                                                    TableOrder tableOrder = tableOrders.Where(d => d.IdTable == table.Id).FirstOrDefault<TableOrder>();
+                                                }
+                                                @if (tableOrder != null) {
+                                                    @foreach (TableOrderItem tableOrderItem in tableOrderItems.Where(d => d.IdTableOrder == tableOrder.Id))
+                                                    {
+                                                        <tr>
+                                                            <td>@tableOrderItem.Id</td>
+                                                            <td>@menuItems.Where(d => d.Id == tableOrderItem.Order.IdMenuItem).FirstOrDefault().Name</td>
+                                                            <td>@tableOrderItem.Order.quantity</td>
+                                                        </tr>
+                                                    }
                                                 }
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="tableDone(@table.Id)">Kosongi</button>
+                                        <button type="button" class="btn btn-primary" onclick="tableDone(@tableOrder.Id)">Kosongi</button>
                                     </div>
                                     </div>
                                 </div>

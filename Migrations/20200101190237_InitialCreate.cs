@@ -8,7 +8,7 @@ namespace KafeWeb.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Menus",
+                name: "MenuItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -19,7 +19,7 @@ namespace KafeWeb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Menus", x => x.Id);
+                    table.PrimaryKey("PK_MenuItems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,7 +57,8 @@ namespace KafeWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    MenuId = table.Column<int>(nullable: true),
+                    MenuItemId = table.Column<int>(nullable: true),
+                    IdMenuItem = table.Column<int>(nullable: false),
                     DoneStatus = table.Column<bool>(nullable: false),
                     quantity = table.Column<int>(nullable: false)
                 },
@@ -65,9 +66,9 @@ namespace KafeWeb.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Menus_MenuId",
-                        column: x => x.MenuId,
-                        principalTable: "Menus",
+                        name: "FK_Orders_MenuItems_MenuItemId",
+                        column: x => x.MenuItemId,
+                        principalTable: "MenuItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -81,7 +82,8 @@ namespace KafeWeb.Migrations
                     Date = table.Column<DateTime>(nullable: false),
                     DoneStatus = table.Column<bool>(nullable: false),
                     UserId = table.Column<int>(nullable: true),
-                    TableId = table.Column<int>(nullable: true)
+                    TableId = table.Column<int>(nullable: true),
+                    IdTable = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,6 +109,7 @@ namespace KafeWeb.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     TableOrderId = table.Column<int>(nullable: true),
+                    IdTableOrder = table.Column<int>(nullable: false),
                     OrderId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -127,9 +130,9 @@ namespace KafeWeb.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_MenuId",
+                name: "IX_Orders_MenuItemId",
                 table: "Orders",
-                column: "MenuId");
+                column: "MenuItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TableOrderItems_OrderId",
@@ -164,7 +167,7 @@ namespace KafeWeb.Migrations
                 name: "TableOrders");
 
             migrationBuilder.DropTable(
-                name: "Menus");
+                name: "MenuItems");
 
             migrationBuilder.DropTable(
                 name: "Tables");

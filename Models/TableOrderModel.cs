@@ -9,5 +9,7 @@ namespace KafeWeb.Models {
         public User User { get; set; }
 
         public Table Table {get; set;}
+
+        public int IdTable {get; set;}
     }
 }

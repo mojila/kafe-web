@@ -18,24 +18,16 @@ namespace Menu.Controllers
         [HttpGet]
         public IActionResult Index() {
             ViewBag.orderSuccess = "false";
-            ViewBag.menus = new List<KafeWeb.Models.Menu>();
+            ViewBag.menus = new List<MenuItem>();
             ViewBag.orders = new List<KafeWeb.Models.Order>();
             ViewBag.total = 0;
             ViewBag.user = "";
             ViewBag.tables = new List<Table>();
 
             if (ModelState.IsValid) {
-                List<KafeWeb.Models.Menu> menus = context.Menus.ToList<KafeWeb.Models.Menu>();
+                List<MenuItem> menus = context.MenuItems.ToList<MenuItem>();
                 List<KafeWeb.Models.Order> orders = context.Orders.Where(d => d.DoneStatus == false).ToList<KafeWeb.Models.Order>();
-                List<Table> tables = context.Tables.ToList<Table>();
-                tables.ForEach(d => {
-                    TableOrder tableOrder = context.TableOrders.Where(e => e.Table.Id == d.Id).FirstOrDefault<TableOrder>();
-
-                    if ( tableOrder != null && tableOrder.DoneStatus == false) {
-                        d.UseStatus = true;
-                    }
-                });
-                ViewBag.tables = tables;
+                ViewBag.tables = context.Tables.Where(d => d.UseStatus == false).ToList<Table>();
 
                 KafeWeb.Models.User user = context.Users.Where(d => d.Username == HttpContext.Session.GetString("username"))
                     .FirstOrDefault<KafeWeb.Models.User>();
@@ -47,7 +39,7 @@ namespace Menu.Controllers
                 });
 
                 orders.ForEach(el => {
-                    total += el.Menu.Price * el.quantity;
+                    total += el.MenuItem.Price * el.quantity;
                 });
 
                 ViewBag.menus = menus;
@@ -72,14 +64,17 @@ namespace Menu.Controllers
         
         [HttpGet("/Menu/CreateOrder/{id}", Name = "Create_Order")]
         public IActionResult CreateOrder(int id) {
-            KafeWeb.Models.Menu menu = context.Menus
-                .Where(d => d.Id == id).FirstOrDefault<KafeWeb.Models.Menu>();
+            MenuItem menu = context.MenuItems
+                .Where(d => d.Id == id).FirstOrDefault<MenuItem>();
             KafeWeb.Models.Order order = new KafeWeb.Models.Order();
 
-            order.Menu = menu;
+            order.MenuItem = menu;
+            order.IdMenuItem = menu.Id;
             order.quantity = int.Parse(HttpContext.Request.Query["quantity"]);
             order.DoneStatus = false;
-            context.Orders.AddRange(order);
+
+            context.Orders.Add(order);
+
             context.SaveChanges();
 
             return RedirectToAction("Index");
@@ -108,6 +103,7 @@ namespace Menu.Controllers
             tableOrder.Date = DateTime.Now;
             tableOrder.User = context.Users.Where(e => e.Id == user).FirstOrDefault<User>();
             tableOrder.Table = selectedTable;
+            tableOrder.IdTable = selectedTable.Id;
 
             context.TableOrders.Add(tableOrder);
 
@@ -128,6 +124,7 @@ namespace Menu.Controllers
                         TableOrderItem tableOrderItem = new TableOrderItem();
                         tableOrderItem.Order = order;
                         tableOrderItem.TableOrder = lastTableOrder.Last<TableOrder>();
+                        tableOrderItem.IdTableOrder = lastTableOrder.Last<TableOrder>().Id;
 
                         context.TableOrderItems.Add(tableOrderItem);
 

@@ -6,7 +6,7 @@ namespace KafeWeb.Data {
         public KafeContext (DbContextOptions<KafeContext> options) : base(options) {}
 
         public DbSet<KafeWeb.Models.User> Users { get; set; }
-        public DbSet<KafeWeb.Models.Menu> Menus {get; set;}
+        public DbSet<MenuItem> MenuItems {get; set;}
 
         public DbSet<KafeWeb.Models.Order> Orders {get; set;}
 

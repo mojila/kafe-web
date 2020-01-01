@@ -33,10 +33,12 @@ namespace KafeWeb.Models {
 
                 context.Tables.AddRange(
                     new Table {
-                        Name = "Meja 1"
+                        Name = "Meja 1",
+                        UseStatus = false
                     },
                     new Table {
-                        Name = "Meja 2"
+                        Name = "Meja 2",
+                        UseStatus = false
                     }
                 );
 

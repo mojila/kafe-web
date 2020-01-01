@@ -28,7 +28,8 @@ namespace KafeWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    UseStatus = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -22,10 +22,21 @@ namespace Menu.Controllers
             ViewBag.orders = new List<KafeWeb.Models.Order>();
             ViewBag.total = 0;
             ViewBag.user = "";
+            ViewBag.tables = new List<Table>();
 
             if (ModelState.IsValid) {
                 List<KafeWeb.Models.Menu> menus = context.Menus.ToList<KafeWeb.Models.Menu>();
                 List<KafeWeb.Models.Order> orders = context.Orders.Where(d => d.DoneStatus == false).ToList<KafeWeb.Models.Order>();
+                List<Table> tables = context.Tables.ToList<Table>();
+                tables.ForEach(d => {
+                    TableOrder tableOrder = context.TableOrders.Where(e => e.Table.Id == d.Id).FirstOrDefault<TableOrder>();
+
+                    if ( tableOrder != null && tableOrder.DoneStatus == false) {
+                        d.UseStatus = true;
+                    }
+                });
+                ViewBag.tables = tables;
+
                 KafeWeb.Models.User user = context.Users.Where(d => d.Username == HttpContext.Session.GetString("username"))
                     .FirstOrDefault<KafeWeb.Models.User>();
                 int total = 0;
@@ -64,6 +75,7 @@ namespace Menu.Controllers
             KafeWeb.Models.Menu menu = context.Menus
                 .Where(d => d.Id == id).FirstOrDefault<KafeWeb.Models.Menu>();
             KafeWeb.Models.Order order = new KafeWeb.Models.Order();
+
             order.menu = menu;
             order.quantity = int.Parse(HttpContext.Request.Query["quantity"]);
             order.DoneStatus = false;

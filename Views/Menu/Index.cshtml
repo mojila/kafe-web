@@ -4,6 +4,7 @@
     List<KafeWeb.Models.Menu> menus = ViewBag.menus as List<KafeWeb.Models.Menu>;
     List<KafeWeb.Models.Order> orders = ViewBag.orders as List<KafeWeb.Models.Order>;
     KafeWeb.Models.User user = ViewBag.user as KafeWeb.Models.User;
+    List<Table> tables = ViewBag.tables as List<Table>;
 }
 
 <style type="text/css">
@@ -31,7 +32,7 @@
                     </button>
                     </div>
                 </div>
-                <div class="p-3 d-flex flex-wrap" style="max-height: 70vh; overflow-y: auto;">
+                <div class="pt-3 d-flex flex-wrap" style="max-height: 70vh; overflow-y: auto;">
                     @foreach (KafeWeb.Models.Menu menu in menus)
                     {
                         <div class="card mr-3 mb-3" style="width: 11rem;">
@@ -64,6 +65,15 @@
                             <div class="alert alert-warning text-center" role="alert">Pesanan kosong</div>
                         }
                         @if (orders.Count > 0) {
+                            <div>
+                                <select class="form-control" name="selectedTable" id="selectedTable">
+                                    <option>Pilih Meja</option>
+                                    @foreach (Table table in tables)
+                                    {
+                                        <option value="@table.Id">@table.Name</option>
+                                    }
+                                </select>
+                            </div>
                             <table class="table">
                                 <thead>
                                     <tr>

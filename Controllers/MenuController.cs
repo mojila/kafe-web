@@ -47,7 +47,7 @@ namespace Menu.Controllers
                 });
 
                 orders.ForEach(el => {
-                    total += el.menu.Price * el.quantity;
+                    total += el.Menu.Price * el.quantity;
                 });
 
                 ViewBag.menus = menus;
@@ -76,7 +76,7 @@ namespace Menu.Controllers
                 .Where(d => d.Id == id).FirstOrDefault<KafeWeb.Models.Menu>();
             KafeWeb.Models.Order order = new KafeWeb.Models.Order();
 
-            order.menu = menu;
+            order.Menu = menu;
             order.quantity = int.Parse(HttpContext.Request.Query["quantity"]);
             order.DoneStatus = false;
             context.Orders.AddRange(order);
@@ -92,6 +92,51 @@ namespace Menu.Controllers
             context.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult ConfirmOrder() {
+            List<string> orders = HttpContext.Request.Query["orders"].ToString().Split(",").ToList<string>();
+            int user = int.Parse(HttpContext.Request.Query["user"]);
+            int table = int.Parse(HttpContext.Request.Query["table"]);
+            Table selectedTable = context.Tables.Where(e => e.Id == table).FirstOrDefault<Table>();
+            selectedTable.UseStatus = true;
+            context.Tables.Update(selectedTable);
+
+            TableOrder tableOrder = new TableOrder();
+            tableOrder.DoneStatus = false;
+            tableOrder.Date = DateTime.Now;
+            tableOrder.User = context.Users.Where(e => e.Id == user).FirstOrDefault<User>();
+            tableOrder.Table = selectedTable;
+
+            context.TableOrders.Add(tableOrder);
+
+            var saveTableOrder = context.SaveChangesAsync();
+
+            if (saveTableOrder.IsCompletedSuccessfully) {
+                orders.ForEach(d => {
+                    KafeWeb.Models.Order order = context.Orders.Where(x => x.Id == int.Parse(d)).FirstOrDefault<KafeWeb.Models.Order>();
+                    order.DoneStatus = true;
+                    
+                    context.Orders.Update(order);
+
+                    var saveOrder = context.SaveChangesAsync();
+
+                    if (saveOrder.IsCompletedSuccessfully) {
+                        List<TableOrder> lastTableOrder = context.TableOrders.ToList<TableOrder>();
+
+                        TableOrderItem tableOrderItem = new TableOrderItem();
+                        tableOrderItem.Order = order;
+                        tableOrderItem.TableOrder = lastTableOrder.Last<TableOrder>();
+
+                        context.TableOrderItems.Add(tableOrderItem);
+
+                        context.SaveChanges();
+                    }
+                });
+            } 
+
+            return Redirect("/Order");
         }
     }
 }

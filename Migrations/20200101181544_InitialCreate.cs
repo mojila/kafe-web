@@ -57,7 +57,7 @@ namespace KafeWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    menuId = table.Column<int>(nullable: true),
+                    MenuId = table.Column<int>(nullable: true),
                     DoneStatus = table.Column<bool>(nullable: false),
                     quantity = table.Column<int>(nullable: false)
                 },
@@ -65,8 +65,8 @@ namespace KafeWeb.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Menus_menuId",
-                        column: x => x.menuId,
+                        name: "FK_Orders_Menus_MenuId",
+                        column: x => x.MenuId,
                         principalTable: "Menus",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -127,9 +127,9 @@ namespace KafeWeb.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_menuId",
+                name: "IX_Orders_MenuId",
                 table: "Orders",
-                column: "menuId");
+                column: "MenuId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TableOrderItems_OrderId",

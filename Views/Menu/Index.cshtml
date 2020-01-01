@@ -7,6 +7,12 @@
     List<Table> tables = ViewBag.tables as List<Table>;
 }
 
+<script>
+    var orders = [];
+    var user = 0;
+    var table = 0;
+</script>
+
 <style type="text/css">
 .wrapper {
     background: url('/images/a3e62485298625.5db31762dd2a6.jpg') center no-repeat;
@@ -54,6 +60,11 @@
                 <div class="p-3 border rounded">
                     <div>
                         <h6 class="h6">Kasir: @user.Name</h6>
+                        @if (user != null) {
+                            <script>
+                                user = @user.Id;
+                            </script>
+                        }
                     </div>
                 </div>
                 <div class="p-3 border rounded">
@@ -66,7 +77,8 @@
                         }
                         @if (orders.Count > 0) {
                             <div>
-                                <select class="form-control" name="selectedTable" id="selectedTable">
+                                <select class="form-control" name="selectedTable" id="selectedTable"
+                                    onchange="chooseTable(this.value)">
                                     <option>Pilih Meja</option>
                                     @foreach (Table table in tables)
                                     {
@@ -86,11 +98,18 @@
                                 <tbody>
                                     @foreach (KafeWeb.Models.Order order in orders)
                                     {
+                                        <script>
+                                            orders.push(@order.Id);
+                                        </script>
+                                    }
+                                    @foreach (KafeWeb.Models.Order order in orders)
+                                    {
                                         <tr>
-                                            <td>@order.menu.Name</td>
+                                            <td>@order.Menu.Name</td>
                                             <td>@order.quantity</td>
-                                            <td>@(order.menu.Price * order.quantity)</td>
+                                            <td>@(order.Menu.Price * order.quantity)</td>
                                             <td>
+                                                
                                                 <a href="/Menu/CancelOrder/@order.Id" class="btn btn-danger btn-sm">Batal</a>
                                             </td>
                                         </tr>
@@ -104,7 +123,8 @@
                             Total: Rp. @ViewBag.total
                         </div>
                         <div>
-                            <button class="btn btn-success btn-block">Kirim Pesanan</button>
+                            <button class="btn btn-success btn-block"
+                                onclick="confirm()">Kirim Pesanan</button>
                         </div>
                     }
                 </div>
@@ -118,5 +138,19 @@
         let quantity = Number(el.previousElementSibling.value);
 
         window.location = `/Menu/CreateOrder/${id}?quantity=${quantity}`;
+    }
+
+    const chooseTable = (val) => {
+        table = Number(val);
+    }
+
+    const confirm = () => {
+        let currentOrders = orders.join(",");
+
+        if (currentOrders && table && user) {
+            window.location = `/Menu/ConfirmOrder?orders=${currentOrders}&user=${user}&table=${table}`;
+        } else {
+            alert("Isi Semua Field");
+        }
     }
 </script>

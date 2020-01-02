@@ -1,0 +1,79 @@
+@{
+    ViewData["Title"] = "Laporan";
+    List<TableOrder> tableOrders = ViewBag.tableOrders as List<TableOrder>;
+    List<User> users = ViewBag.users as List<User>;
+    List<Table> tables = ViewBag.tables as List<Table>;
+    List<TableOrderItem> tableOrderItems = ViewBag.tableOrderItems as List<TableOrderItem>;
+    List<KafeWeb.Models.Order> orders = ViewBag.orders as List<KafeWeb.Models.Order>;
+    List<MenuItem> menuItems = ViewBag.menuItems as List<MenuItem>;
+}
+
+<partial name="~/Views/Shared/_NavigatorAdmin.cshtml"/>
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Status Selesai</th>
+                <th scope="col">Kasir</th>
+                <th scope="col">Meja</th>
+                <th scope="col">Opsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TableOrder tableOrder in tableOrders) {
+                <tr>
+                    <td>@tableOrder.Id</td>
+                    <td>@tableOrder.Date</td>
+                    <td>@(tableOrder.DoneStatus ? "Selesai":"Belum")</td>
+                    <td>@users.Where(d => d.Id == tableOrder.IdUser).FirstOrDefault().Name</td>
+                    <td>@tables.Where(d => d.Id == tableOrder.IdTable).FirstOrDefault().Name</td>
+                    <td>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#modal-@tableOrder.Id">Detail</button>
+                        <div class="modal fade" id="modal-@tableOrder.Id" tabindex="-1" role="dialog" aria-labelledby="modal-@tableOrder.Id-Label" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Detail Pesanan</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table">
+                                        <thead>
+                                            <th>No.</th>
+                                            <th>Nama Menu</th>
+                                            <th>Jumlah</th>
+                                            <th>Sub Total</th>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (TableOrderItem tableOrderItem in tableOrderItems.Where(d => d.IdTableOrder == tableOrder.Id).ToList<TableOrderItem>())
+                                            {
+                                                @if (tableOrderItem != null) {
+                                                    int idMenu = @orders.Where(d => d.Id == @tableOrderItem.IdOrder).FirstOrDefault().IdMenuItem;
+                                                    
+                                                    <tr>
+                                                        <td>@tableOrderItem.Id</td>
+                                                        <td>@menuItems.Where(d => d.Id == idMenu).FirstOrDefault().Name</td>
+                                                        <td>@orders.Where(d => d.Id == @tableOrderItem.IdOrder).FirstOrDefault().quantity</td>
+                                                        <td>@(orders.Where(d => d.Id == @tableOrderItem.IdOrder).FirstOrDefault().quantity * @menuItems.Where(d => d.Id == idMenu).FirstOrDefault().Price)</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

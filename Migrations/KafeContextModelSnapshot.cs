@@ -93,6 +93,9 @@ namespace KafeWeb.Migrations
                     b.Property<int>("IdTable")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("IdUser")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("TableId")
                         .HasColumnType("INTEGER");
 
@@ -112,6 +115,9 @@ namespace KafeWeb.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdOrder")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("IdTableOrder")

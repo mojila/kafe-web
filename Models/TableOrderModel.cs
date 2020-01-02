@@ -7,6 +7,7 @@ namespace KafeWeb.Models {
         public Boolean DoneStatus {get; set;}
 
         public User User { get; set; }
+        public int IdUser {get; set;}
 
         public Table Table {get; set;}
 

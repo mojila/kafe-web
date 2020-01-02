@@ -102,6 +102,7 @@ namespace Menu.Controllers
             tableOrder.DoneStatus = false;
             tableOrder.Date = DateTime.Now;
             tableOrder.User = context.Users.Where(e => e.Id == user).FirstOrDefault<User>();
+            tableOrder.IdUser = user;
             tableOrder.Table = selectedTable;
             tableOrder.IdTable = selectedTable.Id;
 
@@ -125,6 +126,7 @@ namespace Menu.Controllers
                         tableOrderItem.Order = order;
                         tableOrderItem.TableOrder = lastTableOrder.Last<TableOrder>();
                         tableOrderItem.IdTableOrder = lastTableOrder.Last<TableOrder>().Id;
+                        tableOrderItem.IdOrder = order.Id;
 
                         context.TableOrderItems.Add(tableOrderItem);
 

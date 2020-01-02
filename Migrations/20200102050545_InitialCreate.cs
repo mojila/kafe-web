@@ -82,6 +82,7 @@ namespace KafeWeb.Migrations
                     Date = table.Column<DateTime>(nullable: false),
                     DoneStatus = table.Column<bool>(nullable: false),
                     UserId = table.Column<int>(nullable: true),
+                    IdUser = table.Column<int>(nullable: false),
                     TableId = table.Column<int>(nullable: true),
                     IdTable = table.Column<int>(nullable: false)
                 },
@@ -110,7 +111,8 @@ namespace KafeWeb.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     TableOrderId = table.Column<int>(nullable: true),
                     IdTableOrder = table.Column<int>(nullable: false),
-                    OrderId = table.Column<int>(nullable: true)
+                    OrderId = table.Column<int>(nullable: true),
+                    IdOrder = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

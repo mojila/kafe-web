@@ -42,22 +42,24 @@ namespace KafeWeb.Controllers
 
         [HttpPost]
         public IActionResult Login(string Username, string Password){
-            if (ModelState.IsValid) {
-                try {
-                    User user = context.Users.Where(d => d.Username == Username && d.Password == Password).FirstOrDefault<User>();
-                    HttpContext.Session.SetString("username", user.Username);
+            if (Username != "admin" && Password != "admin") {
+                if (ModelState.IsValid) {
+                    try {
+                        User user = context.Users.Where(d => d.Username == Username && d.Password == Password).FirstOrDefault<User>();
+                        HttpContext.Session.SetString("username", user.Username);
 
-                    return Redirect("/Menu");
-                } catch (NullReferenceException e) {
-                    Debug.WriteLine(e);
+                        return Redirect("/Menu");
+                    } catch (NullReferenceException e) {
+                        Debug.WriteLine(e);
 
-                    TempData["isError"] = "true";
-                    TempData["errorMessage"] = "Username atau Password salah.";
-                    return RedirectToAction("Index");
+                        TempData["isError"] = "true";
+                        TempData["errorMessage"] = "Username atau Password salah.";
+                        return RedirectToAction("Index");
+                    }
                 }
             }
 
-            return Content($"Username: {Username}, Password: {Password}");
+            return Redirect("/User");
         }
 
         [HttpGet]
